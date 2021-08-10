@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 {
     if (argc != 8)
     {
-        std::cout << "Need exactly 8 parameters. Exiting." << std::endl;
+        std::cout << "Need exactly 7 parameters, got " << argc-1 <<". Exiting." << std::endl;
         return(1);
     };
     

@@ -3,6 +3,7 @@ library(tidyverse)
 simulate <- function(exe_dir) {
   command_name = paste0(exe_dir,"simulate_hawkes")
   command = paste(command_name, alpha, a, mu, tau, ndiv, nsim, nthr)
+  print(paste("Running",command))
   system(command)
 }
 
@@ -27,6 +28,34 @@ E <- function(X) {
   matrix(colMeans(as.data.frame(X)), nrow = 1)
 }
 
+name_par <- function(name="", ext="") {
+  if (length(name) > 0)
+    name = paste0(name,"_")
+  
+  if (length(ext) >0)
+  ext = paste0(".", ext)
+  
+  paste0(
+    name,
+    "alpha=",p$alpha,"_",
+    "a=",p$a,"_",
+    "mu=",p$mu,"_",
+    "tau=",p$tau,"_",
+    "ndiv=",p$ndiv,"_",
+    "nsim=",p$nsim,
+    ext
+  )
+}
+
+save_to_png <- function(name="", ...) {
+  file_name = paste0(pic_dir, name_par(name,"png"))
+  dev.print(png, file_name, ...)
+}
+
+save_to_pdf <- function(name="") {
+  file_name = paste0(pic_dir, name_par(name,"pdf"))
+  dev.print(pdf, file_name)
+}
 
 plot_cols <- function(df) {
   if (!("data.frame" %in% class(df)) ) 
@@ -37,11 +66,12 @@ plot_cols <- function(df) {
     pivot_longer(cols=!t, values_to = "y") 
 
   p = ggplot(data=df_plot, aes(x=t, y=y, color=name))+
-    geom_line(size = 0.4) + 
+    geom_line(size = 0.6) + 
     theme(legend.position = "none",
           axis.title.x=element_blank(),
-          axis.title.y=element_blank())+
-    scale_color_brewer(palette = "Dark2")
+          axis.title.y=element_blank())
+  # +
+  #   scale_color_brewer(palette = "Dark2")
   print(p)
 }
 
