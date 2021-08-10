@@ -28,12 +28,12 @@ E <- function(X) {
   matrix(colMeans(as.data.frame(X)), nrow = 1)
 }
 
-name_par <- function(name="", ext="") {
-  if (length(name) > 0)
+p_string <- function(name="", ext="") {
+  if (name != "" )
     name = paste0(name,"_")
   
-  if (length(ext) >0)
-  ext = paste0(".", ext)
+  if (ext != "")
+      ext = paste0(".", ext)
   
   paste0(
     name,
@@ -48,12 +48,14 @@ name_par <- function(name="", ext="") {
 }
 
 save_to_png <- function(name="", ...) {
-  file_name = paste0(pic_dir, name_par(name,"png"))
+  new_dir = paste0(pic_dir, p_string()) 
+  dir.create(file.path(new_dir), showWarnings = FALSE)
+  file_name = paste0(new_dir,"/", p_string(name,"png"))
   dev.print(png, file_name, ...)
 }
 
 save_to_pdf <- function(name="") {
-  file_name = paste0(pic_dir, name_par(name,"pdf"))
+  file_name = paste0(pic_dir, p_string(name,"pdf"))
   dev.print(pdf, file_name)
 }
 

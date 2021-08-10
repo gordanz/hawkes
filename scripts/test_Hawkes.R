@@ -2,15 +2,15 @@
 script_dir = "~/.h/scripts/"
 exe_dir = "~/.h/build/"
 data_dir = "~/.h/build/"
-pic_dir = "~/.h/pics/"
+pic_dir = "~/.h/output/"
 source(paste0(script_dir,"functions_Hawkes.R"))
 }
 
 # parameters
 {
-n=1000; alpha = 2; mu_0 = 10; tau_0 = 1; a_0 = 0.5;
+n=1000; alpha = 0.75; mu_0 = 10; tau_0 = 1; a_0 = 0.5;
   a = 1 - a_0/n; mu = mu_0*n; tau = tau_0*n;
-ndiv = 5000; nthr = 8; nsim = 500;
+ndiv = 1000; nthr = 8; nsim = 1;
 }
   
 # call 
@@ -18,10 +18,10 @@ ndiv = 5000; nthr = 8; nsim = 500;
 get_results(data_dir)
 
 # sample a few trajectories and plot them
-dld[100, 1:100] %>%   
-  slice_sample(n=1) %>%
+N %>%   
+  slice_sample(n=10) %>%
   plot_rows
-save_to_png("dld-initial", width = 1500)
+save_to_png("N", width = 1500)
 # save_to_pdf("B-multiple")
 
 # code checks
