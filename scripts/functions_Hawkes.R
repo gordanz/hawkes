@@ -1,22 +1,21 @@
 library(tidyverse)
 
-simulate <- function() {
-  sdir = "~/.h/build/"
-  setwd(sdir)
-  
-  command_name = paste0(sdir,"simulate_hawkes")
+simulate <- function(exe_dir) {
+  command_name = paste0(exe_dir,"simulate_hawkes")
   command = paste(command_name, alpha, a, mu, tau, ndiv, nsim, nthr)
   system(command)
-  
-  p <<- read.table("par.csv", header = TRUE, sep=",")
-  dN <<- read.table("N.csv", header  = FALSE, sep=",")
-  ld <<- read.table("ld.csv", header = FALSE, sep=",")
+}
+
+get_data <- function(data_dir) {
+  p <<- read.table(paste0(data_dir,"par.csv"), header = TRUE, sep=",")
+  dN <<- read.table(paste0(data_dir,"N.csv"), header  = FALSE, sep=",")
+  ld <<- read.table(paste0(data_dir,"ld.csv"), header = FALSE, sep=",")
   dM <<- dN - ld*p$dt
   dB <<- dM/sqrt(ld)
   N <<- data.frame(t(apply(dN,1,cumsum)))
   dld <<- data.frame(t(apply(ld,1,diff)))
-  # M <<- data.frame(t(apply(dM,1,cumsum)))
-  # B <<- data.frame(t(apply(dB,1,cumsum)))
+  M <<- data.frame(t(apply(dM,1,cumsum)))
+  B <<- data.frame(t(apply(dB,1,cumsum)))
 }
 
 demean_cols <- function(df) {

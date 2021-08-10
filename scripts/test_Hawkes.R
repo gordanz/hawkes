@@ -1,13 +1,23 @@
-source("~/.h/R/functions_Hawkes.R")
-n=1000;
-alpha = 2; a = 1 - 0.5/n; mu = 10*n; tau = n;
-ndiv = 10000; nthr = 8; nsim = 1000/nthr;
-simulate()
+script_dir = "~/.h/scripts/"
+exe_dir = "~/.h/build/"
+data_dir = "~/.h/build/"
+
+source(paste0(script_dir,"functions_Hawkes.R"))
+
+# parameters
+n=1000; alpha = 2; mu_0 = 10; tau_0 = 1; a_0 = 0.5;
+  a = 1 - a_0/n; mu = mu_0*n; tau = tau_0*n;
+ndiv = 10000; nthr = 1; nsim = 1;
+
+# call 
+simulate(exe_dir)
+get_results(data_dir)
 
 # # demean trajectories, sample a few and plot
 ld %>%   
   slice_sample(n=1) %>%
   plot_rows
+
 
  
 # # check if martingale
