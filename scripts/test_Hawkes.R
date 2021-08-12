@@ -14,14 +14,14 @@ ndiv = 1000; nthr = 8; nsim = 1;
 }
   
 # call 
-# simulate(exe_dir)
+simulate(exe_dir)
 get_results(data_dir)
 
 # sample a few trajectories and plot them
-N %>%   
-  slice_sample(n=10) %>%
+dld[,1:100] %>%   
+  slice_sample(n=1) %>%
   plot_rows
-save_to_png("N", width = 1500)
+save_to_png("dld-initial", width = 1500)
 # save_to_pdf("B-multiple")
 
 # code checks
