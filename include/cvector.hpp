@@ -12,18 +12,24 @@ public:
     std::vector<T> data;
     typename std::vector<T>::iterator myend;
 
-    cvector(size_t expected_size)
+    cvector()
     {
-        data.reserve(expected_size);
         myend = data.end();
     };
 
+    void reserve(size_t expected_size)
+    {
+        data.reserve(expected_size);
+        myend = data.begin();
+    };
 
-    typename std::vector<T>::iterator begin() {
+    typename std::vector<T>::iterator begin()
+    {
         return(data.begin());
     }
-    
-    typename std::vector<T>::iterator end() {
+
+    typename std::vector<T>::iterator end() 
+    {
         return(myend);
     }
     void push_back(T x)
