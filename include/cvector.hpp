@@ -2,6 +2,7 @@
 #define __CVECTOR_H__
 
 #include <iostream>
+#include <iterator>
 #include <vector>
 
 template <class T>
@@ -9,30 +10,44 @@ class cvector
 {
 public:
     std::vector<T> data;
-    size_t pos;
-    cvector(size_t max_size)
+    typename std::vector<T>::iterator myend;
+
+    cvector(size_t expected_size)
     {
-        data.reserve(max_size);
-        pos=0;
+        data.reserve(expected_size);
+        myend = data.end();
     };
+
+
+    typename std::vector<T>::iterator begin() {
+        return(data.begin());
+    }
     
+    typename std::vector<T>::iterator end() {
+        return(myend);
+    }
     void push_back(T x)
     {
-        if (pos >= data.size())
+        if (myend == data.end())
+        {
             data.push_back(x);
+            myend = data.end();
+        }
         else
-            data[pos] = x;
-        pos++;
+        {
+            *myend = x;
+            std::advance(myend,1);
+        };
     };
     
     size_t size()
     {
-        return(pos);
+        return(std::distance(data.begin(), myend));
     };
     
     void reset()
     {
-        pos=0;
+        myend = data.begin();
     };
     
     T operator[](size_t i)
@@ -44,10 +59,12 @@ public:
 template< class T>
 std::ostream &operator<<(std::ostream &output, cvector<T> &v)
 {
-    for (size_t i = 0; i < v.pos; i++)
+
+    typename std::vector<T>::iterator it;
+    for (it = v.begin(); it != v.end();  it++)
     {
-        output << v.data[i];
-        if (i + 1 < v.pos)
+        output << *it;
+        if ( std::next(it) != v.end() )
             output << ", ";
     };
     return(output);
