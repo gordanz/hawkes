@@ -25,12 +25,12 @@ public:
 
     typename std::vector<T>::iterator begin()
     {
-        return(data.begin());
+        return (data.begin());
     }
 
-    typename std::vector<T>::iterator end() 
+    typename std::vector<T>::iterator end()
     {
-        return(myend);
+        return (myend);
     }
     void push_back(T x)
     {
@@ -42,38 +42,38 @@ public:
         else
         {
             *myend = x;
-            std::advance(myend,1);
+            std::advance(myend, 1);
         };
     };
-    
+
     size_t size()
     {
-        return(std::distance(data.begin(), myend));
+        return (std::distance(data.begin(), myend));
     };
-    
+
     void reset()
     {
         myend = data.begin();
     };
-    
+
     T operator[](size_t i)
     {
-        return(data[i]);
+        return (data[i]);
     }
 };
 
-template< class T>
+template <class T>
 std::ostream &operator<<(std::ostream &output, cvector<T> &v)
 {
 
     typename std::vector<T>::iterator it;
-    for (it = v.begin(); it != v.end();  it++)
+    for (it = v.begin(); it != v.end(); it++)
     {
         output << *it;
-        if ( std::next(it) != v.end() )
+        if (std::next(it) != v.end())
             output << ", ";
     };
-    return(output);
+    return (output);
 };
 
 #endif // __CVECTOR_H__

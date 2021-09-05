@@ -1,14 +1,14 @@
 #include <iostream>
 #include <sstream>
-#include "Simulator.hpp"
+#include "HawkesSimulator.hpp"
 
-std::string Simulator::parameters_to_csv()
+std::string HawkesSimulator::parameters_to_csv()
 {
     std::stringstream ss;
-    ss << "a, alpha,  tau, mu, ndiv, nsim, nthr" << std::endl;
-    ss << a <<", "
+    ss << "a, alpha, sigma, mu, ndiv, nsim, nthr" << std::endl;
+    ss << a << ", "
        << alpha << ", "
-       << tau << ", "
+       << sigma << ", "
        << mu << ", "
        << ndiv << ", "
        << nsim << std::endl;
@@ -16,19 +16,19 @@ std::string Simulator::parameters_to_csv()
     return(ss.str());
 };
 
-std::string Simulator::parameters_to_string()
+std::string HawkesSimulator::parameters_to_string()
 {
     std::stringstream ss;
-    ss << "a=" << a << "_"  
+    ss << "a=" << a << "_"
        << "alpha=" << alpha << "_"
-       << "tau=" << tau << "_" 
+       << "sigma=" << sigma << "_" 
        << "mu=" << mu << "_"
        << "ndiv=" << ndiv << "_"
        << "nsim=" << nsim;
     return(ss.str());
 };
 
-std::string Simulator::info()
+std::string HawkesSimulator::info()
 {
    std::stringstream ss;
    ss << "Parameters: " << parameters_to_string() << std::endl;

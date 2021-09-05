@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "ctime": "cpp"
-    }
+        "ctime": "cpp",
+        "__tree": "cpp",
+        "algorithm": "cpp",
+        "deque": "cpp",
+        "type_traits": "cpp"
+    },
+    "cSpell.enabled": false
 }

@@ -3,28 +3,31 @@
 #include <ctime>
 #include <iostream> // for debugging
 
-#include "Simulator.hpp"
+#include "HawkesSimulator.hpp"
 #define RANDMAX 4294967295
 
 using namespace std;
-Simulator::Simulator(double a, double alpha, double mu, double tau, size_t ndiv, size_t nsim, int id) 
+HawkesSimulator::HawkesSimulator(double a, double alpha, double mu, double sigma, size_t ndiv, size_t nsim, int id) 
     : a (a)
     , alpha (alpha)
     , mu (mu)
-    , tau (tau)
+    , sigma (sigma)
     , ndiv ( ndiv)
     , nsim ( nsim )
     , id ( id)
 {
 
     // compute the values for derived constants
-    oomu = 1.0 / mu;
-    oorm = 1.0 / RANDMAX;
-    aalot = a * alpha / tau;
-    mooal = -1.0 / alpha;
-    min_pareto = pow(tau, mooal);
-    dt = 1.0 / ndiv;
-    nout = nsim*ndiv;
+    oomu   = 1.0 / mu;
+    oorm   = 1.0 / RANDMAX;
+    alsi   = alpha * sigma;
+    ooal   = 1.0 / alpha;
+    ooalsi = 1.0 / alsi;
+    oosi   = 1.0 / sigma;
+    aosi   = a * oosi;
+    dt     = 1.0 / ndiv;
+    mudt   = mu * dt;
+    nout   = nsim*ndiv;
 
     // compute poisson probabilities
     double prob = 0;
@@ -49,11 +52,20 @@ Simulator::Simulator(double a, double alpha, double mu, double tau, size_t ndiv,
     points.reserve( size_t( mu / (1.0 - a) ) );
     N.resize(nsim * ndiv,0.0);
     ld.resize(nsim * ndiv,0.0);
+    L.resize(nsim * ndiv,0.0);
 };
 
-double Simulator::phi(double x)
+double HawkesSimulator::phi(double x)
 {
-    return ( aalot * pow((x + min_pareto), -1.0 - alpha));
+    // To match the paper, we must have pdf (x) \sim x^(-1-alpha)
+   return( aosi * pow( 1 + x * ooalsi , -1 - alpha) ); 
 };
+
+double HawkesSimulator::Phi(double x)
+{
+    // To match the paper, we must have cdf (x) \sim x^(-alpha)
+    return(a* ( 1.0 - pow((1.0+ x * ooalsi), - alpha)));
+};
+
 
 
