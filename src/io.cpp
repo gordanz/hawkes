@@ -7,10 +7,10 @@
 #include <iomanip> // to set precision
 #include <vector>
 
-void write_string(std::string name, std::string str)
+void write_string_to_file(std::string file_name, std::string str)
 {
     std::ofstream file;
-    file.open(name);
+    file.open(file_name);
     file << str;
 }
 

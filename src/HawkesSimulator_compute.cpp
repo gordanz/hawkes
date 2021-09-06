@@ -56,10 +56,10 @@ void HawkesSimulator::discretize_and_store(size_t simulation_number)
     size_t offset = simulation_number * ndiv;
     size_t ip;
 
-    // initial values (N is set to 0 when constructed)
+    // initial values (dN is set to 0 when constructed)
     for (size_t j = 0; j < ndiv; j++)
     {
-        // N[offset + j] = 0.0;
+        // dN[offset + j] = 0.0;
         L[offset + j] = (j + 1) * mudt;
         ld[offset + j] = mu;
     };
@@ -68,7 +68,7 @@ void HawkesSimulator::discretize_and_store(size_t simulation_number)
     {
         ip = size_t(p / dt); // the bin number containing p
 
-        N[offset + ip]++;
+        dN[offset + ip]++;
 
         for (size_t j = ip; j < ndiv; j++)
         {

@@ -8,13 +8,13 @@
 #include <string>
 #include <vector>
 
-void write_string(std::string name, std::string str);
+void write_string_to_file(std::string filename, std::string str);
 
 template <class T>
-void write_vector(std::string name, std::vector<T> v, size_t period = SIZE_T_MAX)
+void write_vector_as_matrix_to_file(std::string file_name, std::vector<T> v, size_t period = SIZE_T_MAX)
 {
     std::ofstream file;
-    file.open(name);
+    file.open(file_name);
     for (size_t i = 0; i < v.size(); i++)
     {
         file << v[i];

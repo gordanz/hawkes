@@ -5,11 +5,8 @@
 #include "HawkesSimulator.hpp"
 #include "utilities.hpp"
 
-void HawkesSimulator::run(bool pbar, bool timer)
+void HawkesSimulator::run(bool pbar)
 {
-    if (timer)
-        tic("");
-
     for (size_t i = 0; i < nsim; i++)
     {
         if (id == 1 && pbar)
@@ -23,6 +20,4 @@ void HawkesSimulator::run(bool pbar, bool timer)
     if (id == 1 && pbar)
         progress_bar(nsim, nsim);
 
-    if (timer)
-        toc("Time: ");
 };

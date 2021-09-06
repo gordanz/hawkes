@@ -4,7 +4,12 @@
         "__tree": "cpp",
         "algorithm": "cpp",
         "deque": "cpp",
-        "type_traits": "cpp"
+        "type_traits": "cpp",
+        "bitset": "cpp",
+        "iterator": "cpp",
+        "memory": "cpp",
+        "ratio": "cpp",
+        "utility": "cpp"
     },
     "cSpell.enabled": false
 }

@@ -7,16 +7,19 @@
 #define RANDMAX 4294967295
 
 using namespace std;
-HawkesSimulator::HawkesSimulator(double a, double alpha, double mu, double sigma, size_t ndiv, size_t nsim, int id) 
-    : a (a)
-    , alpha (alpha)
-    , mu (mu)
-    , sigma (sigma)
-    , ndiv ( ndiv)
-    , nsim ( nsim )
-    , id ( id)
-{
 
+HawkesSimulator::HawkesSimulator(Parameters par, int id)
+    : par(par)
+    , id( id)
+{
+    // copy from par class 
+    a = par.a;
+    alpha = par.alpha;
+    mu = par.mu;
+    sigma = par.sigma;
+    nsim = par.nsim;
+    ndiv = par.ndiv;
+    
     // compute the values for derived constants
     oomu   = 1.0 / mu;
     oorm   = 1.0 / RANDMAX;
@@ -29,7 +32,7 @@ HawkesSimulator::HawkesSimulator(double a, double alpha, double mu, double sigma
     mudt   = mu * dt;
     nout   = nsim*ndiv;
 
-    // compute poisson probabilities
+    // compute Poisson probabilities
     double prob = 0;
     double prob_i = exp(-a);
     int i = 1;
@@ -50,10 +53,11 @@ HawkesSimulator::HawkesSimulator(double a, double alpha, double mu, double sigma
 
     // reserve space for vectors
     points.reserve( size_t( mu / (1.0 - a) ) );
-    N.resize(nsim * ndiv,0.0);
+    dN.resize(nsim * ndiv,0.0);
     ld.resize(nsim * ndiv,0.0);
     L.resize(nsim * ndiv,0.0);
 };
+
 
 double HawkesSimulator::phi(double x)
 {

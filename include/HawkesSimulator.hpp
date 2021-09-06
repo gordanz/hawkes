@@ -3,18 +3,22 @@
 
 #include <cstddef>
 #include <vector>
+#include <string>
 #include "cvector.hpp"
 
 #include "pcg_random.hpp"
+#include "Parameters.hpp"
 typedef pcg32 rng_type;
 
 class HawkesSimulator
 {
-private:
+public: // for testing only, really private
+
     // user supplied
     double a, alpha, mu, sigma;
     size_t ndiv, nsim;
     int id;
+    Parameters par; // packaged
 
     // derived
     double oomu, oorm, alsi, aosi, ooal, ooalsi, oosi, mudt, dt;
@@ -26,7 +30,7 @@ private:
 
     // containers
     cvector<double> points;
-    std::vector<double> N;
+    std::vector<double> dN;
     std::vector<double> ld;
     std::vector<double> L;
 
@@ -44,14 +48,11 @@ private:
     void discretize_and_store(size_t simulation_number);
 
 public:
-    HawkesSimulator(double a, double alpha, double mu, double sigma, size_t ndiv, size_t nsim, int id);
-    void test();
-    void run(bool pbar = false, bool timer = false);
-
+    HawkesSimulator(Parameters par, int id);
+    void run(bool pbar = false);
+    std::string output(std::string outdir);
 
     // io
-    std::string parameters_to_csv();
-    std::string parameters_to_string();
     std::string info();
 };
 

@@ -7,7 +7,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -O3")
 
 # gather all files
 include_directories(include)
-file(GLOB SOURCES src/main.cpp src/HawkesSimulator*.cpp src/utilities.cpp)
+file(GLOB SOURCES src/*.cpp)
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
 
 # link to OpenMP if exists
