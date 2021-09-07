@@ -18,6 +18,7 @@ public: // for testing only, really private
     double a, alpha, mu, sigma;
     size_t ndiv, nsim;
     int id;
+    std::string outdir;
     Parameters par; // packaged
 
     // derived
@@ -50,7 +51,7 @@ public: // for testing only, really private
 public:
     HawkesSimulator(Parameters par, int id);
     void run(bool pbar = false);
-    std::string output(std::string outdir);
+    void output();
 
     // io
     std::string info();

@@ -19,6 +19,7 @@ HawkesSimulator::HawkesSimulator(Parameters par, int id)
     sigma = par.sigma;
     nsim = par.nsim;
     ndiv = par.ndiv;
+    outdir = par.outdir;
     
     // compute the values for derived constants
     oomu   = 1.0 / mu;
