@@ -1,22 +1,32 @@
 library(tidyverse)
 
-simulate <- function(exe_dir) {
+simulate <- function(exe_dir, output_dir) {
   command_name = paste0(exe_dir,"simulate_hawkes")
-  command = paste(command_name, alpha, a, mu, tau, ndiv, nsim, nthr)
-  print(paste("Running",command))
+  command = paste(command_name, 
+                  "-d", Sys.glob(output_dir),
+                  "-l", alpha, 
+                  "-a", a, 
+                  "-m", mu, 
+                  "-s", sigma, 
+                  "-D", ndiv, 
+                  "-S", nsim, 
+                  "-T", nthr)
+  # print(paste("Running",command))
   system(command)
 }
 
 get_results <- function(data_dir) {
   p <<- read.table(paste0(data_dir,"par.csv"), header = TRUE, sep=",")
-  dN <<- read.table(paste0(data_dir,"N.csv"), header  = FALSE, sep=",")
+  dN <<- read.table(paste0(data_dir,"dN.csv"), header  = FALSE, sep=",")
   ld <<- read.table(paste0(data_dir,"ld.csv"), header = FALSE, sep=",")
-  dM <<- dN - ld*p$dt
-  dB <<- dM/sqrt(ld)
-  N <<- data.frame(t(apply(dN,1,cumsum)))
-  dld <<- data.frame(t(apply(ld,1,diff)))
-  M <<- data.frame(t(apply(dM,1,cumsum)))
-  B <<- data.frame(t(apply(dB,1,cumsum)))
+  L <<- read.table(paste0(data_dir,"L.csv"), header  = FALSE, sep=",")
+  N <<- data.frame(t(apply(dN,1,cumsum)));
+  M <<- N - L
+  # dM = 
+  # dB <<- dM/sqrt(ld)
+  # dld <<- data.frame(t(apply(ld,1,diff)))
+  # M <<- data.frame(t(apply(dM,1,cumsum)))
+  # B <<- data.frame(t(apply(dB,1,cumsum)))
 }
 
 demean_cols <- function(df) {

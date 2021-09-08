@@ -1,35 +1,35 @@
 {
 script_dir = "~/.h/scripts/"
 exe_dir = "~/.h/build/"
-data_dir = "~/.h/build/"
+data_dir = "~/.h/output/"
 pic_dir = "~/.h/output/"
 source(paste0(script_dir,"functions_Hawkes.R"))
 }
 
 # parameters
 {
-n=1000; alpha = 0.75; mu_0 = 10; tau_0 = 1; a_0 = 0.5;
-  a = 1 - a_0/n; mu = mu_0*n; tau = tau_0*n;
-ndiv = 1000; nthr = 8; nsim = 1;
+n=100; alpha = 0.55; mu_0 = 10; sigma_0 = 10; a_0 = 0.5;
+ndiv = 1000; nthr = 32; nsim = 10;
+  
+    a = 1 - a_0/n; mu = mu_0*n; sigma = sigma_0/n;
 }
   
 # call 
-simulate(exe_dir)
+simulate(exe_dir, data_dir)
 get_results(data_dir)
 
 # sample a few trajectories and plot them
-dld[,1:100] %>%   
-  slice_sample(n=1) %>%
-  plot_rows
-save_to_png("dld-initial", width = 1500)
+# M %>%
+#   slice_sample(n=15) %>%
+#   plot_rows
+# save_to_png("dld-initial", width = 1500)
 # save_to_pdf("B-multiple")
 
-# code checks
-mean(B[,ndiv])
-sd(B[,ndiv])
-
-# joint distribution of increments of ld
-ggplot(data = dld, aes(x=V500, y=V501))+
-  geom_density_2d()
-cor(dld$V500, dld$V501)
-hist(dld$V500, nclass=50)
+# # code checks
+print(mean(M[,ndiv])/sd(M[,ndiv]))
+ 
+# # joint distribution of increments of ld
+# ggplot(data = dld, aes(x=V500, y=V501))+
+#   geom_density_2d()
+# cor(dld$V500, dld$V501)
+# hist(dld$V500, nclass=50)

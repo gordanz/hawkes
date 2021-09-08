@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
     );
 
     std::cout << par.info() << std::endl;
-    exit(EXIT_SUCCESS);
+    
     tic("");
     omp_set_num_threads(par.nthr);
 #pragma omp parallel

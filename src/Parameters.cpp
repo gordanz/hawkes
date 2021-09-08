@@ -137,11 +137,11 @@ std::string Parameters::info()
 void Parameters::concatenate_outputs()
 {
     std::vector<std::string> names{"dN", "ld", "L"};
-    std::cout << "Concatenating output:" << std::endl;
+    // std::cout << "Concatenating output:" << std::endl;
     for (auto var : names)
     {
         std::string command = "cat " + outdir + var + "_* > " + outdir + var + ".csv";
         system(command.c_str());
-        std::cout << "  " << command << std::endl;
+        // std::cout << "  " << command << std::endl;
     };
 }
