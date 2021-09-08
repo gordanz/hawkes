@@ -12,18 +12,19 @@ int main(int argc, char *argv[])
 {
 
     Parameters par(
-        0.95,          // a
-        1.0,           // alpha
-        900,           // mu
-        0.1,           // sigma
-        1000,          // ndiv
-        16,          // nsim
-        2,             // nthr
-        "/Users/gordanz/.h/build/" // outdir (must end with "/")
+        argc, argv,
+        0.95,                       // a
+        1.0,                        // alpha
+        900,                        // mu
+        0.1,                        // sigma
+        1000,                       // ndiv
+        16,                         // nsim
+        2,                          // nthr
+        "/Users/gordanz/.h/output/" // outdir (must end with "/")
     );
-    par.update_from_command_line(argc, argv);
-    std::cout << par.info() << std::endl;
 
+    std::cout << par.info() << std::endl;
+    exit(EXIT_SUCCESS);
     tic("");
     omp_set_num_threads(par.nthr);
 #pragma omp parallel

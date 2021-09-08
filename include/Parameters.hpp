@@ -13,8 +13,8 @@ public: // for now
 
 public:
     Parameters();
-    Parameters(double, double, double, double, size_t, size_t, size_t, const char*);
-    void update_from_command_line(int argc, char *argv[]);
+    Parameters(int, char **, double, double, double, double, size_t, size_t, size_t, const char *);
+    void update_from_command_line();
     std::string csv();
     std::string str();
     std::string info();

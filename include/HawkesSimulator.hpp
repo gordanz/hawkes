@@ -12,7 +12,7 @@ typedef pcg32 rng_type;
 
 class HawkesSimulator
 {
-public: // for testing only, really private
+private: 
 
     // user supplied
     double a, alpha, mu, sigma;

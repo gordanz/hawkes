@@ -14,13 +14,12 @@ Parameters::Parameters(){
 
 };
 
-Parameters::Parameters(double a, double alpha, double mu, double sigma,
+Parameters::Parameters(int argc, char *argv[], 
+                       double a, double alpha, double mu, double sigma,
                        size_t ndiv, size_t nsim, size_t nthr,
                        const char *outdir)
     : a(a), alpha(alpha), mu(mu), sigma(sigma),
-      ndiv(ndiv), nsim(nsim), nthr(nthr), outdir(outdir){};
-
-void Parameters::update_from_command_line(int argc, char *argv[])
+      ndiv(ndiv), nsim(nsim), nthr(nthr), outdir(outdir)
 {
     int c;
     opterr = 0;
@@ -49,35 +48,35 @@ void Parameters::update_from_command_line(int argc, char *argv[])
             break;
 
         case 'd':
-            outdir = optarg;
+            this->outdir = optarg;
             break;
 
         case 'a':
-            a = std::stod(optarg);
+            this->a = std::stod(optarg);
             break;
 
         case 'l':
-            alpha = std::stod(optarg);
+            this->alpha = std::stod(optarg);
             break;
 
         case 'm':
-            mu = std::stod(optarg);
+            this->mu = std::stod(optarg);
             break;
 
         case 's':
-            sigma = std::stod(optarg);
+            this->sigma = std::stod(optarg);
             break;
 
         case 'D':
-            ndiv = std::stod(optarg);
+            this->ndiv = std::stod(optarg);
             break;
 
         case 'S':
-            nsim = std::stod(optarg);
+            this->nsim = std::stod(optarg);
             break;
 
         case 'T':
-            nthr = std::stod(optarg);
+            this->nthr = std::stod(optarg);
             break;
 
         case '?':
