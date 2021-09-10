@@ -16,13 +16,16 @@ simulate <- function(exe_dir, output_dir) {
 }
 
 get_results <- function(data_dir) {
+  print("Loading data.")
   p <<- read.table(paste0(data_dir,"par.csv"), header = TRUE, sep=",")
   dN <<- read.table(paste0(data_dir,"dN.csv"), header  = FALSE, sep=",")
   N <<- read.table(paste0(data_dir,"N.csv"), header  = FALSE, sep=",")
   ld <<- read.table(paste0(data_dir,"ld.csv"), header = FALSE, sep=",")
   dL <<- read.table(paste0(data_dir,"dL.csv"), header  = FALSE, sep=",")
+  print("Additional computations.")
   dB <<- (dN - dL)/sqrt(ld)
   B <<- data.frame(t(apply(dB,1,cumsum)))
+  print("Done")
 }
 
 demean_cols <- function(df) {
