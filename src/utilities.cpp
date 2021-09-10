@@ -28,7 +28,7 @@ void progress_bar(size_t i, size_t maxi)
     if (percent >= display_next)
     {
         std::cout << "\r"
-                  << "["
+                  << "  ["
                   << std::string(percent / 5, (char)43u)
                   << std::string(100 / 5 - percent / 5, ' ') << "] ";
         std::cout << percent << "% ";

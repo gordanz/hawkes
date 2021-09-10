@@ -32,7 +32,9 @@ private:
     // containers
     cvector<double> points;
     std::vector<double> dN;
+    std::vector<double> N;
     std::vector<double> ld;
+    std::vector<double> dL;
     std::vector<double> L;
 
     //rng

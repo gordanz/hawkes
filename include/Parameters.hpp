@@ -10,11 +10,11 @@ public: // for now
     double a, alpha, mu, sigma;
     size_t ndiv, nsim, nthr;
     std::string outdir;
+    int verbose;
 
 public:
     Parameters();
     Parameters(int, char **, double, double, double, double, size_t, size_t, size_t, const char *);
-    void update_from_command_line();
     std::string csv();
     std::string str();
     std::string info();

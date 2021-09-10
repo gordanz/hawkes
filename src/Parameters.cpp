@@ -23,14 +23,16 @@ Parameters::Parameters(int argc, char *argv[],
 {
     int c;
     opterr = 0;
+    verbose = 0;
 
-    while ((c = getopt(argc, argv, "hd::a::l::m::s::D::S::T::")) != -1)
+    while ((c = getopt(argc, argv, "hvd::a::l::m::s::D::S::T::")) != -1)
     {
         switch (c)
         {
 
         case 'h':
             std::cout << "Usage:" << std::endl;
+            std::cout << "  -v (multiple allowed)  " << std::endl;
             std::cout << "  -h this help," << std::endl;
             std::cout << "  -d set output directory," << std::endl;
             std::cout << "  -a a," << std::endl;
@@ -45,6 +47,10 @@ Parameters::Parameters(int argc, char *argv[],
 
         case '0':
             std::cout << "Case 0" << std::endl;
+            break;
+
+        case 'v':
+            this->verbose++;
             break;
 
         case 'd':
@@ -122,8 +128,7 @@ std::string Parameters::str()
 std::string Parameters::info()
 {
     std::stringstream ss;
-    ss << "Parameters:" << std::endl
-       << "  a = " << a << ", "
+    ss << "  a = " << a << ", "
        << "alpha = " << alpha << ", "
        << "sigma = " << sigma << ", "
        << "mu = " << mu << ", "
@@ -136,8 +141,7 @@ std::string Parameters::info()
 
 void Parameters::concatenate_outputs()
 {
-    std::vector<std::string> names{"dN", "ld", "L"};
-    // std::cout << "Concatenating output:" << std::endl;
+    std::vector<std::string> names{"dN", "N",  "ld", "dL", "L"};
     for (auto var : names)
     {
         std::string command = "cat " + outdir + var + "_* > " + outdir + var + ".csv";

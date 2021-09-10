@@ -55,7 +55,9 @@ HawkesSimulator::HawkesSimulator(Parameters par, int id)
     // reserve space for vectors
     points.reserve( size_t( mu / (1.0 - a) ) );
     dN.resize(nsim * ndiv,0.0);
+    N.resize(nsim * ndiv,0.0);
     ld.resize(nsim * ndiv,0.0);
+    dL.resize(nsim * ndiv,0.0);
     L.resize(nsim * ndiv,0.0);
 };
 
