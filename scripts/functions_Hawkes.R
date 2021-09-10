@@ -11,22 +11,18 @@ simulate <- function(exe_dir, output_dir) {
                   "-D", ndiv, 
                   "-S", nsim, 
                   "-T", nthr)
-  # print(paste("Running",command))
+  print(paste("Running",command))
   system(command)
 }
 
 get_results <- function(data_dir) {
   p <<- read.table(paste0(data_dir,"par.csv"), header = TRUE, sep=",")
   dN <<- read.table(paste0(data_dir,"dN.csv"), header  = FALSE, sep=",")
+  N <<- read.table(paste0(data_dir,"N.csv"), header  = FALSE, sep=",")
   ld <<- read.table(paste0(data_dir,"ld.csv"), header = FALSE, sep=",")
-  L <<- read.table(paste0(data_dir,"L.csv"), header  = FALSE, sep=",")
-  N <<- data.frame(t(apply(dN,1,cumsum)));
-  M <<- N - L
-  # dM = 
-  # dB <<- dM/sqrt(ld)
-  # dld <<- data.frame(t(apply(ld,1,diff)))
-  # M <<- data.frame(t(apply(dM,1,cumsum)))
-  # B <<- data.frame(t(apply(dB,1,cumsum)))
+  dL <<- read.table(paste0(data_dir,"dL.csv"), header  = FALSE, sep=",")
+  dB <<- (dN - dL)/sqrt(ld)
+  B <<- data.frame(t(apply(dB,1,cumsum)))
 }
 
 demean_cols <- function(df) {

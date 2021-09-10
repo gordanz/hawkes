@@ -10,7 +10,6 @@ public: // for now
     double a, alpha, mu, sigma;
     size_t ndiv, nsim, nthr;
     std::string outdir;
-    int verbose;
 
 public:
     Parameters();

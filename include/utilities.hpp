@@ -1,6 +1,6 @@
 #include <cstdio>
 #include <string>
 
-void tic(std::string str);
-void toc(std::string str);
+void tic(void);
+std::string toc(void);
 void progress_bar(size_t i, size_t maxi);

@@ -5,9 +5,8 @@
 
 #include "Parameters.hpp"
 #include "HawkesSimulator.hpp"
-#include "Logger.hpp"
 #include "utilities.hpp" // for timing
-
+#include "debug.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -23,17 +22,14 @@ int main(int argc, char *argv[])
         "/Users/gordanz/.h/output/" // outdir (must end with "/")
     );
 
-    Logger log(par.verbose);
 
-    std::cout << "Level = " << log.level << std::endl;
     
-    exit(EXIT_SUCCESS); 
 
-    std::cout << "Getting parameters." << std::endl;
-    std::cout << par.info() << std::endl;
+    dbg << "Getting parameters." << std::endl;
+    dbg << par.info() << std::endl;
     
-    tic("");
-    std::cout << "Simulating. " << std::endl;
+    tic();
+    dbg << "Simulating. " << std::endl;
     omp_set_num_threads(par.nthr);
 #pragma omp parallel
     {
@@ -41,14 +37,16 @@ int main(int argc, char *argv[])
         HawkesSimulator S(par, id);
         S.run(true);
         if (id == 1)
-            std::cout << "Writing to files. " << std::endl;
+        {
+            dbg << "Writing to files. " << std::endl;
+        };
             S.output();
     };
-    std::cout << "Concatenating files." << std::endl;
+    dbg << "Concatenating files." << std::endl;
     par.concatenate_outputs();
 
     
-    toc("Time: ");
+    dbg << "Time: " << toc() << std::endl;
 
     return (0);
 }

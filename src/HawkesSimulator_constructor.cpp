@@ -1,7 +1,7 @@
 #include <vector>
 #include <cmath>
 #include <ctime>
-#include <iostream> // for debugging
+
 
 #include "HawkesSimulator.hpp"
 #define RANDMAX 4294967295

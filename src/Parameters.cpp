@@ -7,6 +7,7 @@
 #include <getopt.h>
 #include <vector>
 #include <string>
+#include "debug.hpp"
 
 #include "Parameters.hpp"
 
@@ -23,9 +24,8 @@ Parameters::Parameters(int argc, char *argv[],
 {
     int c;
     opterr = 0;
-    verbose = 0;
 
-    while ((c = getopt(argc, argv, "hvd::a::l::m::s::D::S::T::")) != -1)
+    while ((c = getopt(argc, argv, "hd::a::l::m::s::D::S::T::")) != -1)
     {
         switch (c)
         {
@@ -47,10 +47,6 @@ Parameters::Parameters(int argc, char *argv[],
 
         case '0':
             std::cout << "Case 0" << std::endl;
-            break;
-
-        case 'v':
-            this->verbose++;
             break;
 
         case 'd':
@@ -146,6 +142,6 @@ void Parameters::concatenate_outputs()
     {
         std::string command = "cat " + outdir + var + "_* > " + outdir + var + ".csv";
         system(command.c_str());
-        // std::cout << "  " << command << std::endl;
+        ddbg << "  " << command << std::endl;
     };
 }
