@@ -35,8 +35,8 @@ void HawkesSimulator::output()
       std::string L_full =  outdir+"L_"+idstr+".csv";
 
       write_vector_as_matrix_to_file(dN_full, dN, ndiv);
-      write_vector_as_matrix_to_file(N_full, dN, ndiv);
+      write_vector_as_matrix_to_file(N_full, N, ndiv);
       write_vector_as_matrix_to_file(ld_full, ld, ndiv);
       write_vector_as_matrix_to_file(dL_full, dL, ndiv);
-      write_vector_as_matrix_to_file(L_full, dL, ndiv);
+      write_vector_as_matrix_to_file(L_full, L, ndiv);
 };
