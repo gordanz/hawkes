@@ -11,19 +11,17 @@
 int main(int argc, char *argv[])
 {
     Parameters par(
-        argc, argv,
+        argc, argv,                 // use command line if supplied, otherwise 
+                                    // use the default pars below:
         0.95,                       // a
         1.0,                        // alpha
-        9,                        // mu
+        9,                          // mu
         0.1,                        // sigma
         1000,                       // ndiv
         16,                         // nsim
         2,                          // nthr
         "/Users/gordanz/.h/output/" // outdir (must end with "/")
     );
-
-
-    
 
     dbg << "Getting parameters." << std::endl;
     dbg << par.info() << std::endl;
