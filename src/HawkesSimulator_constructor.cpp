@@ -7,7 +7,9 @@
 #define RANDMAX 4294967295
 
 using namespace std;
-
+/**
+ * ... text ...
+ */
 HawkesSimulator::HawkesSimulator(Parameters par, int id)
     : par(par)
     , id( id)
