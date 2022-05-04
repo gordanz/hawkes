@@ -1,26 +1,30 @@
 {
 script_dir = "~/.h/scripts/"
 exe_dir = "~/.h/build/"
-data_dir = "~/.h/output/"
+data_dir_2 = "~/.h/output2/"
+data_dir6 = "~/.h/output06/"
 pic_dir = "~/.h/output/"
 source(paste0(script_dir,"functions_Hawkes.R"))
 }
 
 # parameters
 {
-n=3000; alpha = 2; mu_0 = 1; sigma_0 = 1; a_0 = 0.9;
-ndiv = 500; nthr = 8; nsim = 1;
+n=3000; alpha = 0.6; mu_0 = 1; sigma_0 = 1; a_0 = 0.9;
+ndiv = 1000; nthr = 8; nsim = 1;
   
     a = 1 - a_0/n; mu = mu_0*n; sigma = sigma_0/n;
 }
   
 # call 
-simulate(exe_dir, data_dir)
+simulate(exe_dir, data_dir6)
 get_results(data_dir)
 
+
+C = (1-a) * ld / n;
+
 # sample a few trajectories and plot them
-dN%>%
-  slice_sample(n=4) %>%
+C %>%
+  slice_sample(n=1) %>%
   plot_rows
 
 print(n/(1-a)/mean(N[,ndiv]));
