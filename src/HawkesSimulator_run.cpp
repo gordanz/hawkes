@@ -17,6 +17,7 @@ void HawkesSimulator::run(bool pbar)
         hawksify();
         discretize_and_store(i);
     };
+    // Only one parallel simulation should show the progress bar
     if (id == 1 && pbar)
         progress_bar(nsim, nsim);
 

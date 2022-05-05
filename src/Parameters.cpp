@@ -15,7 +15,7 @@ Parameters::Parameters(){
 
 };
 
-Parameters::Parameters(int argc, char *argv[], 
+Parameters::Parameters(int argc, char **argv,
                        double a, double alpha, double mu, double sigma,
                        size_t ndiv, size_t nsim, size_t nthr,
                        const char *outdir)

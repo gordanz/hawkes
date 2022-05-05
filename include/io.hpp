@@ -11,6 +11,13 @@
 void write_string_to_file(std::string filename, std::string str);
 
 template <class T>
+/**
+ * @brief Split vector into rows of size `period` and write to file.
+ * 
+ * @param file_name 
+ * @param v 
+ * @param period 
+ */
 void write_vector_as_matrix_to_file(std::string file_name, std::vector<T> v, size_t period = SIZE_T_MAX)
 {
     std::ofstream file;
