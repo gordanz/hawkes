@@ -31,12 +31,17 @@ def run_simulation( n, alpha, ndiv, nsim, nthr ):
     os.system(command)
     os.system(f"rm {output_subdir}/*_*")
 
-ndiv = 100; nsim=1; nthr=8; 
+ndiv = 1000; nsim=1; nthr=8; 
 
-n=10; 
 
-alphas = [ 0.1, 0.3, 0.5, 0.7, 0.9, 1.1, 1.3, 2.0]
-for alpha in alphas:
-    run_simulation( n, alpha, ndiv, nsim, nthr)
+# ns = [100]
+# alphas = [ 0.1, 0.3, 0.5, 0.7, 0.9, 1.1, 1.3, 2.0]
+# for n in ns:
+#     for alpha in alphas:
+#         run_simulation( n, alpha, ndiv, nsim, nthr)
+
+run_simulation( n=1000, alpha=0.7, ndiv=1000, nsim=100, nthr=8)
+
+
 
 

@@ -68,7 +68,7 @@ save_to_pdf <- function(name="") {
   dev.print(pdf, file_name)
 }
 
-plot_cols <- function(df) {
+plot_cols <- function(df, points = FALSE) {
   if (!("data.frame" %in% class(df)) ) 
     df = data.frame(y=df)
   
@@ -76,20 +76,31 @@ plot_cols <- function(df) {
     add_column(t = seq(from = 0, to = 1, length.out = nrow(df) )) %>%
     pivot_longer(cols=!t, values_to = "y") 
 
+  if (points) {
+  p = ggplot(data=df_plot, aes(x=t, y=y, color=name))+
+    geom_point(size = 0.6) + 
+    geom_segment(aes(x = t, y = y, xend = t, yend = 0))+
+    theme(legend.position = "none",
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank())
+  # +
+  #   scale_color_brewer(palette = "Dark2") 
+  } else {
   p = ggplot(data=df_plot, aes(x=t, y=y, color=name))+
     geom_line(size = 0.6) + 
     theme(legend.position = "none",
           axis.title.x=element_blank(),
           axis.title.y=element_blank())
   # +
-  #   scale_color_brewer(palette = "Dark2")
+  #   scale_color_brewer(palette = "Dark2") }
+  }
   print(p)
 }
 
 
 
-plot_rows <- function(df){
-  plot_cols(t(df))
+plot_rows <- function(df,...){
+  plot_cols(t(df),...)
 }
 
 
