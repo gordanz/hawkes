@@ -1,3 +1,3 @@
 # hawkes
 
-Preliminary simulations of almost unstable Hawkes processes
+C++ library for simulation of nearly unstable Hawkes processes. 
